@@ -1,16 +1,24 @@
-import { Trash } from 'phosphor-react';
+import { Check, Circle, Trash } from 'phosphor-react';
+import classnames from 'classnames';
+import { Task } from '../data/tasksMock';
 
-export const Tasks = () => {
-   const isComplete = true;
+export const Tasks = ({ id, task, isCompleted }: Task) => {
    return (
       <div className='w-[46rem] h-[4.5rem] p-4 flex items-start bg-gray-500 rounded-lg border border-gray-400'>
-         <input
-            type='checkbox'
-            title='Marcar tarefa como feita'
-            className='pt-4 before:rounded-full cursor-pointer border-2 border-blue hover:border-blueDark checked:bg-purple'
-         />
+         <button
+            className={classnames('cursor-pointer rounded-full', {
+               'text-blue hover:text-blueDark': !isCompleted,
+               'bg-purple text-gray-100': isCompleted,
+            })}
+         >
+            {isCompleted ? <Check size={20} /> : <Circle size={20} />}
+         </button>
 
-         <p className='w-[39.5rem] mx-3 text-[0.875rem]'>
+         <p
+            className={classnames('w-[39.5rem] mx-3 text-sm', {
+               'line-through text-gray-300': isCompleted,
+            })}
+         >
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium
             iusto ad praesentium voluptate explicabo beatae quis nihil labore!
          </p>
