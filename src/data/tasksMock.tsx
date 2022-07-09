@@ -1,4 +1,4 @@
-interface Task {
+export interface Task {
    id: string | Number;
    task: string;
    isCompleted: boolean;
