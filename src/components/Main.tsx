@@ -1,4 +1,5 @@
 import { PlusCircle } from 'phosphor-react';
+import { NoTask } from './NoTask';
 import { Tasks } from './Task';
 
 export const Main = () => {
@@ -33,7 +34,8 @@ export const Main = () => {
             </div>
          </section>
 
-         <Tasks />
+         {/* <NoTask /> */}
+         <Tasks isCompleted={false} id={''} task={''} />
       </main>
    );
 };
