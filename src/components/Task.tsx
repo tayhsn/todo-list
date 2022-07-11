@@ -1,11 +1,25 @@
 import { Check, Circle, Trash } from 'phosphor-react';
 import classnames from 'classnames';
-import { Task } from '../data/tasksMock';
 
-export const Tasks = ({ id, task, isCompleted }: Task) => {
+interface TaskProps {
+   id: string;
+   task: string;
+   isCompleted: boolean;
+   onDeleteTask: (id: string) => void;
+   onTaskCompleted: (id: string) => void;
+}
+
+export const Tasks = ({
+   id,
+   task,
+   isCompleted,
+   onDeleteTask,
+   onTaskCompleted,
+}: TaskProps) => {
    return (
       <div className='w-[46rem] h-[4.5rem] p-4 flex items-start bg-gray-500 rounded-lg border border-gray-400'>
          <button
+            onClick={() => onTaskCompleted(id)}
             className={classnames('cursor-pointer rounded-full', {
                'text-blue hover:text-blueDark': !isCompleted,
                'bg-purple text-gray-100': isCompleted,
@@ -19,13 +33,13 @@ export const Tasks = ({ id, task, isCompleted }: Task) => {
                'line-through text-gray-300': isCompleted,
             })}
          >
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium
-            iusto ad praesentium voluptate explicabo beatae quis nihil labore!
+            {task}
          </p>
 
          <button
             title='Deletar tarefa'
             className='text-gray-300 hover:text-danger hover:bg-gray-400 hover:rounded-sm'
+            onClick={() => onDeleteTask(id)}
          >
             <Trash size={20} />
          </button>
