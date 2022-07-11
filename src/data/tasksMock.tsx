@@ -1,23 +1,18 @@
 export interface Task {
-   id: string | Number;
+   id: string;
    task: string;
    isCompleted: boolean;
 }
 
-export const tasks: Task[] = [
+export const tasksMock: Task[] = [
    {
-      id: 1,
+      id: '1',
       task: 'Codar React',
       isCompleted: true,
    },
    {
-      id: 2,
+      id: '2',
       task: 'Estudar Arquitetura',
-      isCompleted: true,
-   },
-   {
-      id: 3,
-      task: 'Fazer compras',
       isCompleted: false,
    },
 ];
