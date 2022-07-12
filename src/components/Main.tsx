@@ -54,6 +54,9 @@ export const Main = () => {
       setTasks(taskMapped);
    };
 
+   const handleEnterKeyPress = (event: React.KeyboardEvent) =>
+      event.code === 'Enter' ? handleCreateTask(event) : null;
+
    useEffect(() => {
       countTasksCompleted();
    }, [tasks]);
@@ -81,6 +84,7 @@ export const Main = () => {
                onChange={handleInputChange}
                value={newTask}
                onInvalid={handleInputInvalid}
+               onKeyPress={handleEnterKeyPress}
             />
             <button
                className='flex items-center p-4 rounded-lg bg-blueDark text-sm font-bold enabled:hover:bg-blue transition-colors disabled:opacity-70 disabled:cursor-not-allowed'
