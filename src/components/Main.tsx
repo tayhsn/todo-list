@@ -1,12 +1,19 @@
 import { PlusCircle } from 'phosphor-react';
-import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
-import { Task, tasksMock } from '../data/tasksMock';
+import {
+   ChangeEvent,
+   FormEvent,
+   InvalidEvent,
+   useEffect,
+   useState,
+} from 'react';
+import { tasksMock } from '../data/tasksMock';
 import { NoTask } from './NoTask';
 import { Tasks } from './Task';
 
 export const Main = () => {
    const [tasks, setTasks] = useState(tasksMock);
    const [newTask, setNewTask] = useState('');
+   const [tasksCompleted, setTasksCompleted] = useState(0);
 
    const handleCreateTask = (event: FormEvent) => {
       event.preventDefault();
@@ -30,7 +37,7 @@ export const Main = () => {
       event.target.setCustomValidity('Esse campo é obrigatório');
    };
 
-   const deleteTask = (taskToDelete: string) => {
+   const handleDeleteTask = (taskToDelete: string) => {
       const tasksWithoutDeletedOne = tasks.filter(
          (task) => task.id !== taskToDelete
       );
@@ -38,27 +45,31 @@ export const Main = () => {
       setTasks(tasksWithoutDeletedOne);
    };
 
-   const markTaskAsCompleted = (taskCompleted: string) => {
-      // const taskMarkedAsComplete = tasks.map((task) => {
-      //    if (task.id === taskCompleted) {
-      //       const editedTask = {
-      //          id: task.id,
-      //          task: task.task,
-      //          isCompleted: !taskCompleted,
-      //       };
-      //    }
-      // });
+   const handleToggleTaskCompletion = (taskCompleted: string) => {
+      let taskMapped = tasks.map((task) =>
+         task.id === taskCompleted
+            ? { ...task, isCompleted: !task.isCompleted }
+            : { ...task }
+      );
+      setTasks(taskMapped);
+   };
+
+   useEffect(() => {
+      countTasksCompleted();
+   }, [tasks]);
+
+   const countTasksCompleted = () => {
+      let numberOfTasksCompleted = 0;
+      for (let task of tasks) {
+         if (task.isCompleted) {
+            numberOfTasksCompleted++;
+         }
+      }
+      setTasksCompleted(numberOfTasksCompleted);
    };
 
    const isInputTaskEmpty = newTask.length === 0;
    const totalTasks = tasks.length;
-   const totalTasksCompleted = tasks.reduce((acc, task) => {
-      let taskCompleted = 0;
-      if (task.isCompleted) {
-         taskCompleted++;
-      }
-      return taskCompleted;
-   }, 0);
 
    return (
       <main className='w-[46rem] h-[3.375rem] mx-auto absolute inset-x-0 top-44'>
@@ -92,7 +103,7 @@ export const Main = () => {
             <div className='flex'>
                <p className='text-purple font-bold text-sm mr-2'>Concluídas</p>
                <span className='bg-gray-400 text-gray-200 px-2 py-0.5 rounded-full text-xs flex items-center'>
-                  {totalTasksCompleted} de {totalTasks}
+                  {tasksCompleted} de {totalTasks}
                </span>
             </div>
          </section>
@@ -105,8 +116,8 @@ export const Main = () => {
                      id={task.id}
                      task={task.task}
                      isCompleted={task.isCompleted}
-                     onDeleteTask={deleteTask}
-                     onTaskCompleted={markTaskAsCompleted}
+                     onDeleteTask={handleDeleteTask}
+                     onToggleTaskCompletion={handleToggleTaskCompletion}
                   />
                ))
          ) : (
