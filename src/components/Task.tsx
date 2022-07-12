@@ -6,7 +6,7 @@ interface TaskProps {
    task: string;
    isCompleted: boolean;
    onDeleteTask: (id: string) => void;
-   onTaskCompleted: (id: string) => void;
+   onToggleTaskCompletion: (id: string) => void;
 }
 
 export const Tasks = ({
@@ -14,12 +14,12 @@ export const Tasks = ({
    task,
    isCompleted,
    onDeleteTask,
-   onTaskCompleted,
+   onToggleTaskCompletion,
 }: TaskProps) => {
    return (
       <div className='w-[46rem] h-[4.5rem] p-4 flex items-start bg-gray-500 rounded-lg border border-gray-400'>
          <button
-            onClick={() => onTaskCompleted(id)}
+            onClick={() => onToggleTaskCompletion(id)}
             className={classnames('cursor-pointer rounded-full', {
                'text-blue hover:text-blueDark': !isCompleted,
                'bg-purple text-gray-100': isCompleted,
