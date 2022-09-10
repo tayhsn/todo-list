@@ -29,7 +29,7 @@ export const Tasks = ({
          </button>
 
          <p
-            className={classnames('w-[39.5rem] mx-3 text-sm', {
+            className={classnames('w-[39.5rem] mx-3 text-sm break-words', {
                'line-through text-gray-300': isCompleted,
             })}
          >
