@@ -7,7 +7,7 @@
 
 ## 📑 Sobre o projeto
 
-Esta é aplicação é o desafio de entrega do Módulo "Fundamentos de React.js" do Ignite, curso de especialização em Reactjs da Rocketseat.
+Esta aplicação é **o projeto de conclusão** do módulo "Fundamentos de Reactjs" do curso de especialização Ignite.
 
 [Layout](<https://www.figma.com/file/5q5f4nzDGCe5F9h1HwZaFy/ToDo-List-(Copy)?node-id=0%3A1>)
 
