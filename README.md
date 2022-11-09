@@ -1,7 +1,7 @@
 
 # Todo list ✍🏻
 
-## 📲 [Link do deploy](todo-list-tayhsn.vercel.app)
+## 📲 [Link do deploy](https://todo-list-bllssyf54-tayhsn.vercel.app)
 
 ![Capa do desafio](./src/assets/capa.png)
 
